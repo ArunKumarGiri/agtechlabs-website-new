@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -26,17 +26,8 @@ export default function App() {
     setPrefilledService(serviceName);
   };
 
-  const getBasename = () => {
-    const base = import.meta.env.BASE_URL || '/';
-    const cleanBase = base.replace(/\/$/, '');
-    if (!cleanBase) return undefined;
-    return typeof window !== 'undefined' && window.location.pathname.startsWith(cleanBase)
-      ? cleanBase
-      : undefined;
-  };
-
   return (
-    <BrowserRouter basename={getBasename()}>
+    <HashRouter>
       <ScrollToTop />
       
       <div className="relative min-h-screen bg-[#030508] text-slate-100 flex flex-col selection:bg-purple-500/30 selection:text-purple-200">
@@ -100,6 +91,6 @@ export default function App() {
         </div>
 
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
